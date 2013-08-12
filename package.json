@@ -1,0 +1,12 @@
+{
+  "name": "wicked-ooh-game",
+  "version": "0.0.1",
+  "author": "Gido Krömer <mail@cacodaemon.de>",
+  "devDependencies": {
+    "grunt": "~0.4.0",
+    "grunt-typescript": "~0.2.2",
+    "grunt-contrib-uglify": "~0.2.2",
+    "grunt-contrib-clean": "~0.5.0",
+    "grunt-rename": "~0.1.2"
+  }
+}

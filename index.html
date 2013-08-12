@@ -1,0 +1,72 @@
+<html>
+<head>
+	<title>TypeScriptTunnelEffect by www.cacodaemon.de</title>
+	<style type="text/css">
+		* {
+			padding: 0;
+			margin: 0;
+			image-rendering:optimizeSpeed;              /* Legal fallback                 */
+			image-rendering:-moz-crisp-edges;           /* Firefox                        */
+			image-rendering:-o-crisp-edges;             /* Opera                          */
+			image-rendering:-webkit-optimize-contrast;  /* Chrome (and eventually Safari) */
+			image-rendering:crisp-edges;                /* CSS3 Proposed                  */
+			image-rendering:optimize-contrast;          /* Possible future browsers.      */
+			-ms-interpolation-mode:bicubic;             /* IE8+                           */      
+		}
+
+		canvas {
+			transform-origin: 0% 0%;
+			-ms-transform-origin: 0% 0%;
+			-webkit-transform-origin: 0% 0%;
+			-o-transform-origin: 0% 0%;
+			-moz-transform-origin: 0% 0%;
+			transform: scale(3, 3);
+			-ms-transform: scale(3, 3); 
+			-webkit-transform: scale(3, 3); 
+			-o-transform: scale(3, 3); 
+			-moz-transform: scale(3, 3); 
+		}
+	</style>
+</head>
+<body style="background-color: black" id="body">
+	<canvas id="screen" width="320" height="240" style="padding: 0"></canvas>
+</body>
+	<script src="compiled.min.js"></script>
+	<script type="text/javascript">
+	window.onload = function () {
+		var imageDataLoader = new ImageDataLoader();
+		imageDataLoader.load('texture.png', function (imageData) {
+			var gameManager = new GameManager();
+			gameManager.add(new FPSDisplay());
+			var tunnel = new Tunnel();
+			tunnel.setTexture(imageData);
+			gameManager.add(tunnel);
+			var screen = document.getElementById('screen');
+			var scale = 3;
+			screen.width = window.innerWidth / scale;
+			screen.height = window.innerHeight / scale;
+
+			gameManager.init(screen);
+
+			window.requestAnimFrame = (function(){
+			  return  window.requestAnimationFrame       || 
+					  window.webkitRequestAnimationFrame || 
+					  window.mozRequestAnimationFrame    || 
+					  window.oRequestAnimationFrame      || 
+					  window.msRequestAnimationFrame     || 
+					  function (callback) {
+						window.setTimeout(callback, 1000 / 500);
+					  };
+			})();
+	 
+			(function animloop(){
+			  requestAnimFrame(animloop);
+			  gameManager.timerStart();
+			  gameManager.update();
+			  gameManager.draw();
+			  gameManager.timerEnd();
+			})();
+		});
+	};
+	</script>
+</html>
