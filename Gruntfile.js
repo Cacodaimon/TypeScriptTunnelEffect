@@ -13,7 +13,15 @@ module.exports = function (grunt) {
   grunt.initConfig({
     typescript: {
       base: {
-        src: ['GameManager.ts', 'GameScreen.ts', 'GameObject.ts', 'FPSDisplay.ts', 'LookUpTable.ts', 'LookUpTableRender.ts', 'Vector.ts', 'Tunnel.ts', 'ImageDataLoader.ts'],
+        src: ['lib/GameManager.ts', 
+              'lib/GameScreen.ts', 
+              'lib/GameObject.ts', 
+              'lib/FPSDisplay.ts', 
+              'lib/LookUpTable.ts', 
+              'lib/LookUpTableRender.ts', 
+              'lib/Vector.ts', 
+              'lib/Tunnel.ts', 
+              'lib/ImageDataLoader.ts'],
         dest: 'temp/compiled.js',
         target: 'ES3',
         options: {
@@ -25,11 +33,11 @@ module.exports = function (grunt) {
       prod: {
         options: {
           'beautify': false,
-          'no-mangle-functions': true,
+          'no-mangle-functions': false,
           'report': 'min'
         },
         files: {
-          'compiled.min.js': ['temp/compiled.js']
+          'js/compiled.min.js': ['temp/compiled.js']
         }
       },
       debug: {
@@ -38,7 +46,7 @@ module.exports = function (grunt) {
           'no-mangle-functions': true
         },
         files: {
-          'compiled.min.js': ['temp/compiled.js']
+          'js/compiled.min.js': ['temp/compiled.js']
         }
       }
     },
@@ -51,13 +59,13 @@ module.exports = function (grunt) {
     },
     copy: {
       debug: {
-        src: 'style.css',
-        dest: 'style.min.css',
+        src: 'css/style.css',
+        dest: 'css/style.min.css',
       },
     },
     watch: {
       scripts: {
-        files: ['*.ts', '*.css'],
+        files: ['lib/*.ts', 'style/*.css'],
         tasks: ['default'],
       },
     },
@@ -78,6 +86,6 @@ npm install grunt-contrib-clean --save-dev
 npm install grunt-typescript --save-dev
 npm install grunt-contrib-uglify --save-dev
 npm install grunt-rename --save-dev
-npm install grunt-contrib-cssmin
+npm install grunt-contrib-cssmin --save-dev
 npm install grunt-contrib-copy --save-dev
-npm install grunt-contrib-watch*/
+npm install grunt-contrib-watch --save-dev*/

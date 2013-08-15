@@ -1,16 +1,27 @@
 <html>
 <head>
   <title>TypeScriptTunnelEffect by www.cacodaemon.de</title>
-  <link rel="stylesheet" href="style.min.css">
+  <link rel="stylesheet" href="css/style.min.css">
 </head>
 <body style="background-color: black" id="body">
   <canvas id="screen" width="320" height="240" style="padding: 0"></canvas>
 </body>
-  <script src="compiled.min.js"></script>
+  <script src="js/compiled.min.js"></script>
   <script type="text/javascript">
+  window.requestAnimFrame = (function(){
+    return  window.requestAnimationFrame       || 
+            window.webkitRequestAnimationFrame || 
+            window.mozRequestAnimationFrame    || 
+            window.oRequestAnimationFrame      || 
+            window.msRequestAnimationFrame     || 
+            function (callback) {
+              window.setTimeout(callback, 1000 / 60);
+            };
+  })();
+
   window.onload = function () {
     var imageDataLoader = new ImageDataLoader();
-    imageDataLoader.load('texture.png', function (imageData) {
+    imageDataLoader.load('img/texture.png', function (imageData) {
       var gameManager = new GameManager();
       gameManager.add(new FPSDisplay());
       var tunnel = new Tunnel();
@@ -22,17 +33,6 @@
       screen.height = window.innerHeight / scale;
 
       gameManager.init(screen);
-
-      window.requestAnimFrame = (function(){
-        return  window.requestAnimationFrame       || 
-                window.webkitRequestAnimationFrame || 
-                window.mozRequestAnimationFrame    || 
-                window.oRequestAnimationFrame      || 
-                window.msRequestAnimationFrame     || 
-                function (callback) {
-                  window.setTimeout(callback, 1000 / 500);
-                };
-      })();
 
       (function animloop(){
         requestAnimFrame(animloop);
