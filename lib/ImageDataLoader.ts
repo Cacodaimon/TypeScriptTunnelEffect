@@ -6,7 +6,7 @@ class ImageDataLoader {
 
     constructor() { 
         this.image = new Image();
-        this.canvas = (HTMLCanvasElement)document.createElement('canvas');
+        this.canvas = <HTMLCanvasElement>document.createElement('canvas');
     }
 
     public load(name: string, callBack: (imageData: ImageData) => void) : void {
