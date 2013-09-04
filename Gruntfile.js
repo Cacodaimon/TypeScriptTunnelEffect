@@ -54,7 +54,7 @@ module.exports = function (grunt) {
     rename: {
       debug: {
         src: 'temp/compiled.js',
-        dest: 'compiled.min.js'
+        dest: 'js/compiled.min.js'
       },
     },
     copy: {
